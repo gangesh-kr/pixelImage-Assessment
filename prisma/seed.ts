@@ -47,7 +47,7 @@ async function main() {
   const shopSite = await prisma.website.create({
     data: {
       name: "E-Commerce App",
-      url: "https://shop.example.com",
+      url: "https://github.com/gangesh-kr",
       status: "ONLINE",
       clientId: clientUser.id,
     },
@@ -56,7 +56,7 @@ async function main() {
   const hubSite = await prisma.website.create({
     data: {
       name: "Corporate Hub",
-      url: "https://hub.example.com",
+      url: "https://www.barg-ai.com",
       status: "DEGRADED",
       clientId: clientUser.id,
     },
