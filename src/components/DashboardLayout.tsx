@@ -21,7 +21,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         const res = await fetch("/api/notifications");
         if (res.ok) {
           const notifications = await res.json();
-          const unread = notifications.filter((n: any) => !n.isRead).length;
+          const unread = notifications.filter((n: { isRead: boolean }) => !n.isRead).length;
           setUnreadCount(unread);
         }
       } catch {
@@ -70,7 +70,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="flex flex-col flex-1 min-h-0">
           <div className="flex items-center h-16 px-6 border-b border-border bg-background/50">
             <ShieldAlert className="h-6 w-6 text-primary mr-2.5 animate-pulse" />
-            <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-violet-400 to-purple-500 bg-clip-text text-transparent">
+            <span className="text-lg font-bold tracking-tight gradient-text">
               Shield Issue Tracker
             </span>
           </div>
@@ -141,7 +141,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <header className="sticky top-0 z-40 md:hidden flex items-center justify-between h-16 px-4 border-b border-border bg-card/90 backdrop-blur-md">
           <div className="flex items-center">
             <ShieldAlert className="h-6 w-6 text-primary mr-2" />
-            <span className="text-md font-bold tracking-tight bg-gradient-to-r from-violet-400 to-purple-500 bg-clip-text text-transparent">
+            <span className="text-md font-bold tracking-tight gradient-text">
               Shield Issue
             </span>
           </div>
@@ -180,7 +180,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="flex items-center justify-between pb-4 border-b border-border mb-6">
               <div className="flex items-center">
                 <ShieldAlert className="h-6 w-6 text-primary mr-2" />
-                <span className="text-md font-bold bg-gradient-to-r from-violet-400 to-purple-500 bg-clip-text text-transparent">
+                <span className="text-md font-bold gradient-text">
                   Shield Issue Tracker
                 </span>
               </div>

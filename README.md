@@ -108,3 +108,29 @@ To quickly test different dashboards and capabilities, use the quick login butto
     *   **Email**: `manager@test.com`
     *   **Password**: `password123`
     *   **Role**: MANAGER (can edit all issues, change severities/statuses, and draft AI responses)
+
+---
+
+## 📌 Assumptions Made
+
+*   **Mock Authentication**: Authentication uses bcrypt-based credentials with NextAuth.js CredentialsProvider. No OAuth/SSO integrations are included. Demo accounts are pre-seeded for quick evaluation.
+*   **Website Monitoring**: Website status data (ONLINE, DOWN, DEGRADED, UNKNOWN) uses mock seed data rather than real HTTP ping checks or uptime monitoring. In production, this would be replaced by a background job performing real health checks.
+*   **Database Choice**: SQLite was chosen for local development simplicity and zero-configuration setup. The Prisma schema is SQL-standard and designed for a seamless swap to PostgreSQL in production environments.
+*   **In-App Notifications Only**: Notifications are implemented as in-app alerts (displayed in a Notification Center page with sidebar badge). Email or SMS notifications are not implemented but could be added via services like SendGrid or AWS SES.
+*   **AI Integration is Optional**: The OpenAI API key is optional. When absent, the application gracefully degrades to a local keyword-based heuristic engine for issue classification and template-based response drafting.
+*   **Single Tenant**: The current implementation assumes a single-tenant model. Multi-tenancy (multiple clients with separate data isolation) would require additional schema design.
+*   **No File Uploads**: Issue reporting does not support file/screenshot attachments. This would be a natural extension using cloud storage (S3, Cloudflare R2).
+
+---
+
+## 🔔 Notification Implementation
+
+The notification system uses **in-app notifications** stored in the database:
+
+*   **When Triggered**: Notifications are automatically created when:
+    *   A manager changes an issue status to **RESOLVED** — the client who reported the issue receives a notification.
+    *   A manager **adds a comment/response** to an issue — the client is notified of the new response.
+*   **Delivery**: Notifications appear in the Notification Center (`/notifications`) page and are indicated by a badge counter in the sidebar navigation.
+*   **Polling**: The sidebar polls for unread notification count every 15 seconds to provide near-real-time badge updates.
+*   **Mark as Read**: Users can mark individual notifications or all notifications as read.
+*   **Design Decision**: In-app notifications were chosen over email for simplicity and instant visibility within the platform. In production, this would be extended with email notifications (via SendGrid/SES) and optionally WebSocket-based real-time push.

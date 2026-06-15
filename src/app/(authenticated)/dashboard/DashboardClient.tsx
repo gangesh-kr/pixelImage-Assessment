@@ -103,7 +103,7 @@ export default function DashboardClient({ initialWebsites }: DashboardClientProp
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm flex items-center">
+        <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm flex items-center hover:border-primary/30 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
           <div className="p-3 bg-primary/10 border border-primary/20 text-primary rounded-xl mr-4">
             <Globe className="h-6 w-6" />
           </div>
@@ -113,7 +113,7 @@ export default function DashboardClient({ initialWebsites }: DashboardClientProp
           </div>
         </div>
 
-        <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm flex items-center">
+        <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm flex items-center hover:border-primary/30 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
           <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl mr-4">
             <CheckCircle2 className="h-6 w-6" />
           </div>
@@ -125,7 +125,7 @@ export default function DashboardClient({ initialWebsites }: DashboardClientProp
           </div>
         </div>
 
-        <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm flex items-center">
+        <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm flex items-center hover:border-primary/30 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
           <div className="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl mr-4">
             <AlertTriangle className="h-6 w-6" />
           </div>
@@ -135,7 +135,7 @@ export default function DashboardClient({ initialWebsites }: DashboardClientProp
           </div>
         </div>
 
-        <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm flex items-center">
+        <div className="bg-card border border-border/60 rounded-2xl p-6 shadow-sm flex items-center hover:border-primary/30 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
           <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl mr-4">
             <AlertTriangle className="h-6 w-6" />
           </div>
@@ -158,7 +158,7 @@ export default function DashboardClient({ initialWebsites }: DashboardClientProp
             {websites.map((site) => (
               <div
                 key={site.id}
-                className="bg-card border border-border/60 rounded-2xl p-6 flex flex-col justify-between hover:border-primary/40 transition-all duration-300 shadow-sm relative group overflow-hidden"
+                className="bg-card border border-border/60 rounded-2xl p-6 flex flex-col justify-between hover:border-primary/30 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 shadow-sm relative group overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-[80px] h-[80px] bg-primary/5 rounded-full blur-[20px] pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
 

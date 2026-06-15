@@ -58,6 +58,17 @@ export async function POST(
         },
       });
 
+      // Notify the other party when a comment is added
+      if (isManager) {
+        // Manager commented → notify the client who created the issue
+        await tx.notification.create({
+          data: {
+            userId: issue.createdBy,
+            message: `A manager responded to your issue "${issue.title}".`,
+          },
+        });
+      }
+
       return newComment;
     });
 

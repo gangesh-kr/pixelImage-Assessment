@@ -76,6 +76,7 @@ export default function IssueDetailPage({ params }: { params: Promise<{ id: stri
   const [updatingSeverity, setUpdatingSeverity] = useState(false);
   const [submittingComment, setSubmittingComment] = useState(false);
   const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState("");
   const [error, setError] = useState("");
 
   const fetchIssueDetails = async () => {
@@ -124,6 +125,7 @@ export default function IssueDetailPage({ params }: { params: Promise<{ id: stri
 
   const handleAIGenerateResponse = async () => {
     setAiLoading(true);
+    setAiError("");
     try {
       const res = await fetch("/api/ai", {
         method: "POST",
@@ -140,11 +142,11 @@ export default function IssueDetailPage({ params }: { params: Promise<{ id: stri
           setCommentText(data.draft);
         }
       } else {
-        alert("Failed to generate draft. Ensure OpenAI API Key is configured.");
+        setAiError("Failed to generate draft. Ensure OpenAI API Key is configured.");
       }
     } catch (err) {
       console.error(err);
-      alert("AI Service error.");
+      setAiError("AI Service unavailable. Please try again later.");
     } finally {
       setAiLoading(false);
     }
@@ -353,13 +355,20 @@ export default function IssueDetailPage({ params }: { params: Promise<{ id: stri
                       type="button"
                       onClick={handleAIGenerateResponse}
                       disabled={aiLoading || submittingComment}
-                      className="flex items-center text-xs font-semibold px-3 py-1.5 bg-violet-600/10 border border-violet-500/20 hover:border-violet-500/40 text-violet-400 rounded-lg transition-all cursor-pointer disabled:opacity-50"
+                      className="flex items-center text-xs font-semibold px-3 py-1.5 bg-primary/10 border border-primary/20 hover:border-primary/40 text-primary rounded-lg transition-all cursor-pointer disabled:opacity-50"
                     >
                       <Sparkles className={`mr-1.5 h-4 w-4 ${aiLoading ? "animate-spin" : ""}`} />
                       {aiLoading ? "Drafting..." : "Generate AI Response"}
                     </button>
                   )}
                 </div>
+
+                {aiError && (
+                  <div className="p-2.5 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-xs font-medium flex items-center">
+                    <AlertOctagon className="mr-2 h-3.5 w-3.5 shrink-0" />
+                    {aiError}
+                  </div>
+                )}
 
                 <div className="relative">
                   <textarea
@@ -436,7 +445,7 @@ export default function IssueDetailPage({ params }: { params: Promise<{ id: stri
                   </select>
                 ) : (
                   <div className="flex items-center justify-between gap-3">
-                    <span className="inline-flex px-3 py-1.5 rounded-xl border border-violet-500/20 bg-violet-500/10 text-violet-400 text-xs font-bold uppercase tracking-wider">
+                    <span className="inline-flex px-3 py-1.5 rounded-xl border border-primary/20 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
                       {issue.status.replace(/_/g, " ")}
                     </span>
                     

@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Bell, Check, Eye, Trash2, Calendar, ShieldAlert } from "lucide-react";
+import { Bell, Check, Eye, Calendar } from "lucide-react";
 
 interface Notification {
   id: string;
@@ -13,7 +12,6 @@ interface Notification {
 }
 
 export default function NotificationsPage() {
-  const router = useRouter();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [markingAll, setMarkingAll] = useState(false);

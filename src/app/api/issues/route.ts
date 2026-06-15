@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { prisma } from "@/lib/db";
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
 
 const createIssueSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters long"),
@@ -27,7 +28,7 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get("category");
     const search = searchParams.get("search");
 
-    const whereClause: any = {};
+    const whereClause: Prisma.IssueWhereInput = {};
 
     if (!isManager) {
       whereClause.createdBy = session.user.id;

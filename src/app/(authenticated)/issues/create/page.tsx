@@ -39,7 +39,7 @@ function CreateIssueFormContent() {
           setWebsites(data);
           
           const preSelected = searchParams.get("websiteId");
-          if (preSelected && data.some((w: any) => w.id === preSelected)) {
+          if (preSelected && data.some((w: Website) => w.id === preSelected)) {
             setSelectedWebsiteId(preSelected);
           } else if (data.length > 0) {
             setSelectedWebsiteId(data[0].id);
@@ -203,7 +203,7 @@ function CreateIssueFormContent() {
               type="button"
               onClick={handleAICodeDraft}
               disabled={aiLoading || loading}
-              className="flex items-center text-xs font-semibold px-3 py-1.5 bg-violet-600/10 border border-violet-500/20 hover:border-violet-500/40 text-violet-400 rounded-lg transition-all cursor-pointer disabled:opacity-50"
+              className="flex items-center text-xs font-semibold px-3 py-1.5 bg-primary/10 border border-primary/20 hover:border-primary/40 text-primary rounded-lg transition-all cursor-pointer disabled:opacity-50"
             >
               <BrainCircuit className={`mr-1.5 h-4 w-4 ${aiLoading ? "animate-spin" : ""}`} />
               {aiLoading ? "Analyzing..." : "Classify with AI"}
@@ -251,18 +251,18 @@ function CreateIssueFormContent() {
             <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
               Category
               {aiSuggested && (
-                <span className="ml-2 px-1.5 py-0.25 text-[9px] bg-violet-600/20 text-violet-400 rounded-md border border-violet-500/20 normal-case">
+                <span className="ml-2 px-1.5 py-0.25 text-[9px] bg-primary/20 text-primary rounded-md border border-primary/20 normal-case">
                   AI Suggested
                 </span>
               )}
             </label>
             <div className="grid grid-cols-2 gap-2">
-              {["BUG", "FEEDBACK", "SUGGESTION", "IMPROVEMENT"].map((cat) => (
+              {(["BUG", "FEEDBACK", "SUGGESTION", "IMPROVEMENT"] as const).map((cat) => (
                 <button
                   key={cat}
                   type="button"
                   onClick={() => {
-                    setCategory(cat as any);
+                    setCategory(cat);
                     setAiSuggested(false);
                   }}
                   className={`py-2 px-3 border rounded-xl text-xs font-semibold transition-all cursor-pointer ${
@@ -281,18 +281,18 @@ function CreateIssueFormContent() {
             <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
               Severity Level
               {aiSuggested && (
-                <span className="ml-2 px-1.5 py-0.25 text-[9px] bg-violet-600/20 text-violet-400 rounded-md border border-violet-500/20 normal-case">
+                <span className="ml-2 px-1.5 py-0.25 text-[9px] bg-primary/20 text-primary rounded-md border border-primary/20 normal-case">
                   AI Suggested
                 </span>
               )}
             </label>
             <div className="grid grid-cols-2 gap-2">
-              {["LOW", "MEDIUM", "HIGH", "CRITICAL"].map((sev) => (
+              {(["LOW", "MEDIUM", "HIGH", "CRITICAL"] as const).map((sev) => (
                 <button
                   key={sev}
                   type="button"
                   onClick={() => {
-                    setSeverity(sev as any);
+                    setSeverity(sev);
                     setAiSuggested(false);
                   }}
                   className={`py-2 px-3 border rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${

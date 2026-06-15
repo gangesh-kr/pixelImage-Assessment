@@ -11,7 +11,7 @@ const authMiddleware = withAuth({
 });
 
 export function proxy(request: NextRequest) {
-  return (authMiddleware as any)(request);
+  return (authMiddleware as (req: NextRequest) => Promise<unknown>)(request);
 }
 
 export const config = {

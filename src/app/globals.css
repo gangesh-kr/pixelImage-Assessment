@@ -1,25 +1,128 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --card: #18181b;
-  --card-foreground: #fafafa;
-  --popover: #09090b;
-  --popover-foreground: #fafafa;
-  --primary: #8b5cf6;
+  /* --- Brand Color Components --- */
+  --brand-crimson-h: 3;
+  --brand-crimson-s: 59%;
+  --brand-crimson-l: 43%;
+  --brand-crimson: hsl(var(--brand-crimson-h), var(--brand-crimson-s), var(--brand-crimson-l));
+  --brand-orange-h: 32;
+  --brand-orange-s: 92%;
+  --brand-orange-l: 55%;
+  --brand-orange: hsl(var(--brand-orange-h), var(--brand-orange-s), var(--brand-orange-l));
+  --brand-amber-h: 38;
+  --brand-amber-s: 100%;
+  --brand-amber-l: 59%;
+  --brand-amber: hsl(var(--brand-amber-h), var(--brand-amber-s), var(--brand-amber-l));
+
+  /* --- Base Light Theme Channels (Default) --- */
+  --bg-dark-h: 0;
+  --bg-dark-s: 0%;
+  --bg-dark-l: 100%;
+  --bg-dark: hsl(var(--bg-dark-h), var(--bg-dark-s), var(--bg-dark-l));
+  --bg-primary: var(--bg-dark);
+  
+  --bg-card-h: 0;
+  --bg-card-s: 0%;
+  --bg-card-l: 97%;
+  --bg-card: hsl(var(--bg-card-h), var(--bg-card-s), var(--bg-card-l));
+  
+  --bg-card-hover-h: 0;
+  --bg-card-hover-s: 0%;
+  --bg-card-hover-l: 94%;
+  --bg-card-hover: hsl(var(--bg-card-hover-h), var(--bg-card-hover-s), var(--bg-card-hover-l));
+  
+  --text-primary-h: 0;
+  --text-primary-s: 0%;
+  --text-primary-l: 10%;
+  --text-primary: hsl(var(--text-primary-h), var(--text-primary-s), var(--text-primary-l));
+  
+  --text-secondary-h: 0;
+  --text-secondary-s: 0%;
+  --text-secondary-l: 35%;
+  --text-secondary: hsl(var(--text-secondary-h), var(--text-secondary-s), var(--text-secondary-l));
+  
+  --text-muted-h: 0;
+  --text-muted-s: 0%;
+  --text-muted-l: 60%;
+  --text-muted: hsl(var(--text-muted-h), var(--text-muted-s), var(--text-muted-l));
+
+  /* --- Accents Aliases & RGB equivalents (for backwards compatibility if needed) --- */
+  --accent-blue: var(--brand-crimson);
+  --accent-cyan: var(--brand-orange);
+  --accent-purple: var(--brand-amber);
+  --accent-blue-rgb: 173, 51, 45;
+  --accent-cyan-rgb: 246, 147, 32;
+  --accent-purple-rgb: 255, 180, 47;
+
+  /* Typography */
+  --font-sans: 'Google Sans Text', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Google Sans Display', 'Outfit', sans-serif;
+
+  /* UI Elements & Transparent Glass (constructed dynamically using HSL) */
+  --glass-bg: hsla(var(--bg-dark-h), var(--bg-dark-s), var(--bg-dark-l), 0.7);
+  --glass-border: hsla(var(--text-primary-h), var(--text-primary-s), var(--text-primary-l), 0.1);
+  --glass-border-hover: hsla(var(--text-primary-h), var(--text-primary-s), var(--text-primary-l), 0.2);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  /* Layout */
+  --container-width: 1400px;
+
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- Mappings to standard variables used by Tailwind Theme --- */
+  --background: var(--bg-dark);
+  --foreground: var(--text-primary);
+  --card: var(--bg-card);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-card);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--brand-crimson);
   --primary-foreground: #ffffff;
-  --secondary: #27272a;
-  --secondary-foreground: #fafafa;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-  --accent: #a78bfa;
-  --accent-foreground: #fafafa;
-  --destructive: #ef4444;
-  --destructive-foreground: #fafafa;
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #a78bfa;
+  --secondary: var(--bg-card-hover);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--bg-card-hover);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--brand-orange);
+  --accent-foreground: var(--text-primary);
+  --destructive: hsl(3, 59%, 43%);
+  --destructive-foreground: #ffffff;
+  --border: var(--glass-border);
+  --input: var(--bg-card-hover);
+  --ring: var(--brand-orange);
+}
+
+/* --- Dark Theme Overrides (Optional Toggle or System Pref) --- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-dark-h: 220;
+    --bg-dark-s: 15%;
+    --bg-dark-l: 8%;
+    
+    --bg-card-h: 220;
+    --bg-card-s: 15%;
+    --bg-card-l: 12%;
+    
+    --bg-card-hover-h: 220;
+    --bg-card-hover-s: 15%;
+    --bg-card-hover-l: 16%;
+    
+    --text-primary-h: 0;
+    --text-primary-s: 0%;
+    --text-primary-l: 95%;
+    
+    --text-secondary-h: 0;
+    --text-secondary-s: 0%;
+    --text-secondary-l: 75%;
+    
+    --text-muted-h: 0;
+    --text-muted-s: 0%;
+    --text-muted-l: 50%;
+  }
 }
 
 @theme {
@@ -42,12 +145,15 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-brand-crimson: var(--brand-crimson);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-amber: var(--brand-amber);
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: var(--font-sans);
   overflow-x: hidden;
 }
 
@@ -58,27 +164,32 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: var(--border);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: var(--muted-foreground);
 }
 
 /* Micro-animations and effects */
 .glass-panel {
-  background: rgba(24, 24, 27, 0.7);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  transition: var(--transition-fast);
+}
+
+.glass-panel:hover {
+  border-color: var(--glass-border-hover);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, var(--brand-amber) 0%, var(--brand-crimson) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

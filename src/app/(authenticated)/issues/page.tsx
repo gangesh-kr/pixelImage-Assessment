@@ -4,7 +4,7 @@ import React, { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { AlertCircle, Calendar, Filter, MessageSquare, Search, Plus, Eye } from "lucide-react";
+import { AlertCircle, Calendar, Filter, Search, Plus, Eye } from "lucide-react";
 
 interface Issue {
   id: string;

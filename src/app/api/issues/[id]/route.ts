@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { prisma } from "@/lib/db";
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
 
 const updateIssueSchema = z.object({
   status: z.enum(["OPEN", "IN_REVIEW", "IN_PROGRESS", "WAITING_FOR_CLIENT", "RESOLVED", "CLOSED"]).optional(),
@@ -99,8 +100,13 @@ export async function PATCH(
     }
 
     const updatedIssue = await prisma.$transaction(async (tx) => {
-      const updates: any = {};
-      const timelineEventsToCreate: any[] = [];
+      const updates: Prisma.IssueUpdateInput = {};
+      const timelineEventsToCreate: Array<{
+        type: string;
+        oldValue?: string;
+        newValue: string;
+        createdBy: string;
+      }> = [];
 
       if (status && status !== issue.status) {
         updates.status = status;
