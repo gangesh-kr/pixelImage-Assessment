@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shield Client Issue Tracker
 
-## Getting Started
+A premium modern SaaS platform designed to let clients monitor their website statuses, submit support requests, communicate with management teams, and track ticket resolutions. Support managers can prioritize, triage, and resolve client tickets with an AI-assisted workspace and a complete audit trail.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Key Features
+
+*   **Website Status Monitor**: Dashboard displaying checked domains with live-updating incident flags and issue tallies.
+*   **AI Auto-Classification**: An AI-assisted form analyzer that classifies reported issues into matching categories (`BUG`, `FEEDBACK`, `SUGGESTION`, `IMPROVEMENT`) and recommends severities (`LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
+*   **Dynamic Response Generator**: Auto-draft generator for support managers to quickly craft polite and professional client responses.
+*   **Chronological Timeline Event System**: Complete log tracking (ticket creation, status/severity updates, manager responses, resolutions) providing full lifecycle transparency.
+*   **In-App Notifications**: Client alert inbox triggering real-time flags upon issue resolutions.
+*   **Role-Based Access Control**: Route protection and layout structures tailored for Clients and Managers.
+
+---
+
+## 🛠️ Technology Stack
+
+*   **Core**: Next.js 15+ (App Router), TypeScript, Tailwind CSS v4.0.0
+*   **Authentication**: NextAuth.js (Credentials Provider)
+*   **ORM**: Prisma 7
+*   **Database**: SQLite (configured for easy production PostgreSQL swap)
+*   **AI Engine**: OpenAI SDK
+
+---
+
+## 📂 Project Structure
+
+```
+├── prisma
+│   ├── migrations/       # Database migration SQL logs
+│   ├── schema.prisma     # SQLite schemas
+│   └── seed.ts           # Seeder script for demo data
+├── src
+│   ├── app
+│   │   ├── (authenticated)
+│   │   │   ├── dashboard # Status dashboard view
+│   │   │   ├── issues    # Incidents index & detail forms
+│   │   │   └── notifications # Alert box view
+│   │   ├── api           # Next.js Route Handler APIs
+│   │   ├── login         # Auth page wrapped in Suspense
+│   │   └── layout.tsx    # Root layout configuration
+│   ├── components
+│   │   ├── ui/           # Shared interface wrappers
+│   │   ├── DashboardLayout.tsx  # Dynamic navigation shell
+│   │   └── Providers.tsx        # Session wrappers
+│   ├── lib
+│   │   ├── ai.ts         # AI helper (OpenAI / Heuristics)
+│   │   ├── authOptions.ts       # NextAuth configurations
+│   │   └── db.ts         # Prisma singleton adapter
+│   └── types
+│       └── next-auth.d.ts # Custom auth types
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏁 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Prerequisites
+- **Node.js**: `v20` or higher (we used `v24.15.0`)
+- **NPM**: `v10` or higher
 
-## Learn More
+### 2. Installation
+Clone the repository and install the dependencies:
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Setup Environment Variables
+Create a `.env` file in the root directory and add the following settings:
+```env
+DATABASE_URL="file:./dev.db"
+NEXTAUTH_SECRET="some-super-secret-key-for-local-development-123456"
+NEXTAUTH_URL="http://localhost:3000"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Optional: Add your OpenAI API key for live AI completions.
+# If omitted, the application will seamlessly fall back to local rule-based heuristics.
+OPENAI_API_KEY="your-openai-api-key"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Database Setup & Seeding
+Initialize SQLite migrations and run the seeder:
+```bash
+npx prisma migrate dev --name init
+npx prisma db seed
+```
 
-## Deploy on Vercel
+### 5. Running the Application
+Launch the local development server:
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔑 Demo Accounts
+
+To quickly test different dashboards and capabilities, use the quick login buttons on the `/login` page or use the credentials below:
+
+*   **Client Account**
+    *   **Email**: `client@test.com`
+    *   **Password**: `password123`
+    *   **Role**: CLIENT (can view/report issues and manage alert notifications)
+
+*   **Manager Account**
+    *   **Email**: `manager@test.com`
+    *   **Password**: `password123`
+    *   **Role**: MANAGER (can edit all issues, change severities/statuses, and draft AI responses)
