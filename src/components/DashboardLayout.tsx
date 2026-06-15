@@ -71,7 +71,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="flex items-center h-16 px-6 border-b border-border bg-background/50">
             <ShieldAlert className="h-6 w-6 text-primary mr-2.5 animate-pulse" />
             <span className="text-lg font-bold tracking-tight gradient-text">
-              Shield Issue Tracker
+              Issue Tracker
             </span>
           </div>
 
@@ -142,7 +142,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="flex items-center">
             <ShieldAlert className="h-6 w-6 text-primary mr-2" />
             <span className="text-md font-bold tracking-tight gradient-text">
-              Shield Issue
+              Issue
             </span>
           </div>
           <button
@@ -181,7 +181,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <div className="flex items-center">
                 <ShieldAlert className="h-6 w-6 text-primary mr-2" />
                 <span className="text-md font-bold gradient-text">
-                  Shield Issue Tracker
+                  Issue Tracker
                 </span>
               </div>
               <button
