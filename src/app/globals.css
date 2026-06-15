@@ -96,34 +96,7 @@
   --ring: var(--brand-orange);
 }
 
-/* --- Dark Theme Overrides (Optional Toggle or System Pref) --- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-dark-h: 220;
-    --bg-dark-s: 15%;
-    --bg-dark-l: 8%;
-    
-    --bg-card-h: 220;
-    --bg-card-s: 15%;
-    --bg-card-l: 12%;
-    
-    --bg-card-hover-h: 220;
-    --bg-card-hover-s: 15%;
-    --bg-card-hover-l: 16%;
-    
-    --text-primary-h: 0;
-    --text-primary-s: 0%;
-    --text-primary-l: 95%;
-    
-    --text-secondary-h: 0;
-    --text-secondary-s: 0%;
-    --text-secondary-l: 75%;
-    
-    --text-muted-h: 0;
-    --text-muted-s: 0%;
-    --text-muted-l: 50%;
-  }
-}
+
 
 @theme {
   --color-background: var(--background);
